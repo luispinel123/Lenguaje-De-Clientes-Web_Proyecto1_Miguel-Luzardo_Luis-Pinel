@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nombre de Tu Aplicacion</title>
+
+  <!-- estiolos en CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/print.css" media="print">
+</head>
+<body>
+
+  <!-- Encabezado principal de la aplicacion -->
+  <header>
+    <h1>Nombre de Tu Aplicacion</h1>
+    <!-- Panel de configuracion del tope de UC -->
+    <div id="panel-configuracion">
+      <label for="tope-uc">Tope de UC:</label>
+      <input type="number" id="tope-uc" value="28" min="1" step="1">
+    </div>
+  </header>
+
+  <!-- Contenedor / Lay-out principal -->
+  <main>
+
+    <!-- Contenedor para mensajes globales, alertas o confirmaciones en el DOM -->
+    <div id="contenedor-mensajes" aria-live="polite"></div>
+
+    <!-- Seccion 1: Catalogo de Materias -->
+    <section id="seccion-catalogo">
+      <h2>Catalogo de Materias</h2>
+      
+      <!-- Filtros de busqueda -->
+      <div class="filtros-catalogo">
+        <input type="text" id="busqueda-materia" placeholder="Buscar por nombre o codigo...">
+        <select id="filtro-trimestre">
+          <option value="">Todos los trimestres</option>
+          <!-- Opciones dinamicas segun los datos -->
+        </select>
+        <button id="btn-agregar-trimestre">Agregar trimestre completo</button>
+      </div>
+
+      <!-- Lista o Grid de tarjetas de materias del catalogo -->
+      <div id="lista-materias"></div>
+
+      <!-- Modal o Vista de detalle de la materia -->
+      <dialog id="modal-detalle-materia">
+        <div id="contenido-detalle-materia"></div>
+        <button id="btn-cerrar-detalle">Cerrar</button>
+      </dialog>
+    </section>
+
+    <!-- Seccion 2: Registro / Edicion de Materias Manuales -->
+    <section id="seccion-formulario-manual">
+      <h2>Registrar / Editar Materia Manual</h2>
+      <form id="form-materia-manual" novalidate>
+        <!-- Campos de la materia: codigo, nombre, trimestre, UC -->
+        <!-- Formulario dinamico para agregar secciones y sesiones con bloques -->
+        <button type="submit">Guardar Materia</button>
+      </form>
+    </section>
+
+    <!-- Seccion 3: Materias Seleccionadas y Deteccion de Choques -->
+    <section id="seccion-seleccion">
+      <h2>Materias Seleccionadas</h2>
+      <div id="resumen-seleccion">
+        <span id="total-materias">Materias: 0</span>
+        <span id="total-uc">Total UC: 0</span>
+      </div>
+
+      <!-- Contenedor para informar incompatibilidades / choques -->
+      <div id="contenedor-choques"></div>
+
+      <!-- Lista de materias seleccionadas con opcion a fijar/excluir secciones -->
+      <div id="lista-seleccionadas"></div>
+
+      <button id="btn-generar-horarios">Generar Horarios</button>
+    </section>
+
+    <!-- Seccion 4: Generacion, Filtros, Ordenamiento y Rejilla Semanal -->
+    <section id="seccion-resultados">
+      <h2>Resultados Generados</h2>
+      <p id="contador-resultados"></p>
+
+      <!-- Panel de Filtros de Preferencias -->
+      <div id="panel-preferencias">
+        <fieldset>
+          <legend>Dias Libres</legend>
+          <label><input type="checkbox" name="dia-libre" value="LUN"> Lunes</label>
+          <label><input type="checkbox" name="dia-libre" value="MAR"> Martes</label>
+          <label><input type="checkbox" name="dia-libre" value="MIE"> Miércoles</label>
+          <label><input type="checkbox" name="dia-libre" value="JUE"> Jueves</label>
+          <label><input type="checkbox" name="dia-libre" value="VIE"> Viernes</label>
+          <label><input type="checkbox" name="dia-libre" value="SAB"> Sabado</label>
+        </fieldset>
+
+        <label for="hora-min-entrada">Hora minima de entrada:</label>
+        <input type="time" id="hora-min-entrada">
+
+        <label for="hora-max-salida">Hora maxima de salida:</label>
+        <input type="time" id="hora-max-salida">
+      </div>
+
+      <!-- Panel de Ordenamiento -->
+      <div id="panel-ordenamiento">
+        <label for="criterio-orden">Ordenar por:</label>
+        <select id="criterio-orden">
+          <option value="dias">Menos dias de asistencia</option>
+          <option value="horas-muertas">Menos horas muertas</option>
+          <option value="salida-temprana">Salida mas temprana</option>
+        </select>
+      </div>
+
+      <!-- Visualizacion de la Rejilla Semanal -->
+      <div id="contenedor-rejilla">
+        <!-- Controles de navegacion -->
+        <div class="navegacion-resultados">
+          <button id="btn-anterior-resultado">Anterior</button>
+          <span id="posicion-resultado">Opcion 0 de 0</span>
+          <button id="btn-siguiente-resultado">Siguiente</button>
+        </div>
+
+        <!-- Metricas del resultado actual -->
+        <div id="metricas-resultado"></div>
+
+        <!-- Rejilla semanal construida con CSS Grid -->
+        <div id="rejilla-semanal" class="rejilla-grid"></div>
+
+        <button id="btn-elegir-definitivo">Elegir como Horario Definitivo</button>
+      </div>
+    </section>
+
+    <!-- Seccion 5: Vista de Horario Definitivo y Resumen Imprimible -->
+    <section id="seccion-resumen">
+      <h2>Horario Definitivo</h2>
+      
+      <!-- Boton de impresion (se oculta en la version impresa mediante print.css) -->
+      <button id="btn-imprimir" onclick="window.print()">Imprimir Horario</button>
+
+      <!-- Rejilla para la impresion/resumen -->
+      <div id="rejilla-resumen"></div>
+
+      <!-- Tabla detallada de asignaturas seleccionadas -->
+      <table id="tabla-resumen-materias">
+        <thead>
+          <tr>
+            <th>Codigo</th>
+            <th>Materia</th>
+            <th>Seccion</th>
+            <th>Profesor</th>
+            <th>Horario</th>
+            <th>Aula</th>
+          </tr>
+        </thead>
+        <tbody id="cuerpo-tabla-resumen"></tbody>
+      </table>
+      <div id="resumen-total-uc"></div>
+    </section>
+
+  </main>
+
+  <!-- Carga de Archivos JavaScript -->
+  <!-- 1. Archivos de Datos Provistos (OBLIGATORIO cargarlos primero) -->
+  <script src="data/bloques.js"></script>
+  <script src="data/materias.js"></script>
+
+  <!-- 2. Modulos de Logica de Negocio y Utilidades -->
+  <script src="js/tiempo.js"></script>
+  <script src="js/datos.js"></script>
+  <script src="js/catalogo.js"></script>
+  <script src="js/seleccion.js"></script>
+  <script src="js/formulario.js"></script>
+  <script src="js/choques.js"></script>
+  <script src="js/generador.js"></script>
+  <script src="js/preferencias.js"></script>
+  <script src="js/rejilla.js"></script>
+  <script src="js/resumen.js"></script>
+
+  <!-- 3. Punto de entrada / Coordinacion general de la aplicacion -->
+  <script src="js/app.js"></script>
+
+</body>
+</html>
