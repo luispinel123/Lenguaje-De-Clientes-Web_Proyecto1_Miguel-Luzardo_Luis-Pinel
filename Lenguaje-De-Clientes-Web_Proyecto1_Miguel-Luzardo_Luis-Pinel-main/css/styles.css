@@ -1,0 +1,171 @@
+
+:root {
+--font-primary: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+--font-mono: 'Courier New', Courier, monospace;
+
+
+--color-bg-main: #f4f6f9;
+--color-bg-card: #ffffff;
+--color-text-main: #1e293b;
+--color-text-muted: #64748b;
+--color-border: #e2e8f0;
+
+--color-primary: #2563eb;
+--color-primary-hover: #1d4ed8;
+--color-primary-light: #eff6ff;
+
+--color-accent: #0d9488;
+--color-accent-hover: #0f766e;
+
+--color-danger: #dc2626;
+--color-danger-bg: #fef2f2;
+--color-warning: #d97706;
+--color-warning-bg: #fffbeb;
+--color-success: #16a34a;
+--color-success-bg: #f0fdf4;
+
+/* UI Variables */
+--border-radius: 8px;
+--shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+--shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+--shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+--transition: all 0.2s ease-in-out;
+}
+
+/* base y reseteos */
+
+* {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+}
+
+body {
+font-family: var(--font-primary);
+background-color: var(--color-bg-main);
+color: var(--color-text-main);
+line-height: 1.5;
+padding: 1.5rem;
+}
+
+
+*:focus-visible {
+outline: 2px solid var(--color-primary);
+outline-offset: 2px;
+}
+
+
+header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+background-color: var(--color-bg-card);
+padding: 1.25rem 2rem;
+border-radius: var(--border-radius);
+box-shadow: var(--shadow-sm);
+margin-bottom: 1.5rem;
+border: 1px solid var(--color-border);
+}
+
+header h1 {
+font-size: 1.5rem;
+color: var(--color-primary);
+font-weight: 700;
+}
+
+#panel-configuracion {
+display: flex;
+align-items: center;
+gap: 0.5rem;
+font-weight: 500;
+}
+
+#panel-configuracion input {
+width: 70px;
+padding: 0.4rem 0.6rem;
+border: 1px solid var(--color-border);
+border-radius: var(--border-radius);
+font-size: 0.95rem;
+}
+
+/* 4. LAYOUT PRINCIPAL Y SECCIONES */
+main {
+display: flex;
+flex-direction: column;
+gap: 1.5rem;
+max-width: 1400px;
+margin: 0 auto;
+}
+
+section {
+background: var(--color-bg-card);
+padding: 1.5rem;
+border-radius: var(--border-radius);
+border: 1px solid var(--color-border);
+box-shadow: var(--shadow-sm);
+}
+
+section h2 {
+font-size: 1.25rem;
+margin-bottom: 1rem;
+padding-bottom: 0.5rem;
+border-bottom: 2px solid var(--color-bg-main);
+color: var(--color-text-main);
+}
+
+/* Mensajes / Notificaciones en el DOM */
+#contenedor-mensajes {
+margin-bottom: 1rem;
+}
+
+.mensaje-alerta {
+padding: 1rem;
+border-radius: var(--border-radius);
+margin-bottom: 0.75rem;
+display: flex;
+align-items: center;
+justify-content: space-between;
+font-weight: 500;
+}
+
+.mensaje-alerta.error {
+background-color: var(--color-danger-bg);
+color: var(--color-danger);
+border: 1px solid var(--color-danger);
+}
+
+.mensaje-alerta.advertencia {
+background-color: var(--color-warning-bg);
+color: var(--color-warning);
+border: 1px solid var(--color-warning);
+}
+
+.mensaje-alerta.exito {
+background-color: var(--color-success-bg);
+color: var(--color-success);
+border: 1px solid var(--color-success);
+}
+
+/* 5. SECCIÓN: CATÁLOGO DE MATERIAS */
+.filtros-catalogo {
+display: flex;
+gap: 1rem;
+flex-wrap: wrap;
+margin-bottom: 1.25rem;
+}
+
+.filtros-catalogo input,
+.filtros-catalogo select {
+padding: 0.5rem 0.75rem;
+border: 1px solid var(--color-border);
+border-radius: var(--border-radius);
+font-size: 0.95rem;
+flex: 1;
+min-width: 200px;
+}
+
+#lista-materias {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+gap: 1rem;
+}
