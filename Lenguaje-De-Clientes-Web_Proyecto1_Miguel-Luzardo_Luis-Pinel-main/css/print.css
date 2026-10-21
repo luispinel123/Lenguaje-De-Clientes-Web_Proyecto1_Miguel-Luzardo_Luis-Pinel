@@ -1,0 +1,126 @@
+@media print {
+  /* 1 ocultar elementos innecesarios de la interfaz */
+  header,
+  #panel-configuracion,
+  #seccion-catalogo,
+  #seccion-formulario-manual,
+  #seccion-seleccion,
+  #panel-preferencias,
+  #panel-ordenamiento,
+  .navegacion-resultados,
+  #btn-imprimir,
+  #btn-elegir-definitivo,
+  .filtros-catalogo,
+  #contenedor-mensajes,
+  button {
+    display: none !important;
+  }
+
+  /* 2. configuracion de pagina y base */
+  @page {
+    size: letter landscape; /* Orientación horizontal para adaptar mejor el horario */
+    margin: 1cm;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10pt;
+    line-height: 1.3;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  main {
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* 3.  visibilidad de secciones */
+  #seccion-resultados {
+    display: none !important;
+  }
+
+  #seccion-resumen {
+    display: block !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  #seccion-resumen h2 {
+    font-size: 16pt;
+    text-align: center;
+    border-bottom: 2px solid #000;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    color: #000000;
+  }
+
+  /* 4 rejilla semana impresion */
+  .rejilla-grid {
+    background-color: #ffffff !important;
+    border: 1px solid #000000 !important;
+    page-break-inside: avoid;
+    margin-bottom: 20px;
+  }
+
+  .rejilla-header,
+  .hora-label {
+    background-color: #f0f0f0 !important;
+    color: #000000 !important;
+    border: 1px solid #cccccc !important;
+    font-weight: bold;
+    font-size: 8pt;
+  }
+
+  .bloque-celda {
+    background-color: #ffffff !important;
+    border: 1px solid #eeeeee !important;
+  }
+
+  .bloque-sesion {
+    background-color: #f8f8f8 !important;
+    border: 1px solid #000000 !important;
+    border-left-width: 4px !important; /* Mantiene la distinción visual si hay color */
+    color: #000000 !important;
+    box-shadow: none !important;
+    font-size: 7.5pt;
+    padding: 2px;
+  }
+
+  .bloque-sesion .codigo {
+    font-weight: bold;
+  }
+
+  /* 5. TABLA DE RESUMEN DE MATERIAS */
+  #tabla-resumen-materias {
+    width: 100%;
+    border-collapse: collapse !important;
+    page-break-inside: avoid;
+    margin-top: 15px;
+  }
+
+  #tabla-resumen-materias th,
+  #tabla-resumen-materias td {
+    border: 1px solid #000000 !important;
+    padding: 6px 8px;
+    font-size: 8.5pt;
+    color: #000000 !important;
+  }
+
+  #tabla-resumen-materias th {
+    background-color: #f0f0f0 !important;
+    font-weight: bold;
+  }
+
+  #resumen-total-uc {
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 10pt;
+    text-align: right;
+  }
+}
